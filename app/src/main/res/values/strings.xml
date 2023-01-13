@@ -4,4 +4,6 @@
     <string name="battery_level">Battery level</string>
     <string name="no_station_selected_msg">No station selected</string>
     <string name="no_activity_msg">There is not appropriate Activity</string>
+    <string name="clear">clear</string>
+    <string name="item_exit">exit</string>
 </resources>

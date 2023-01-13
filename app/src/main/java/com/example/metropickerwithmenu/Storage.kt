@@ -1,7 +1,6 @@
 package com.example.metropickerwithmenu
 
 import android.content.Context
-import android.content.SharedPreferences
 
 open class Storage(context: Context) : MainActivity() {
 
@@ -13,7 +12,7 @@ open class Storage(context: Context) : MainActivity() {
         return station ?: mDefaultMsg
     }
 
-    fun setStation(stationName: String) {
+    fun setStation(stationName: String?) {
         val editor = mPrefs.edit()
         editor.putString(KEY_STATION_SELECTED, stationName)
         editor.apply()

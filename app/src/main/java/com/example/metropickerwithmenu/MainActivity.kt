@@ -1,29 +1,38 @@
 package com.example.metropickerwithmenu
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.content.Intent.ACTION_MAIN
 import android.content.IntentFilter
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.metropickerwithmenu.databinding.ActivityMainBinding
 
-open class MainActivity : Activity() {
+open class MainActivity : AppCompatActivity() {
 
     private var mSelectedStation: TextView? = null
     private var mBL: TextView? = null
     private val mStorage: Storage
         get() = Storage(this)
+    private lateinit var binding: ActivityMainBinding
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Toast.makeText(this, ACTION_MAIN, Toast.LENGTH_SHORT).show()
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbar)
 
         // station
         mSelectedStation = findViewById(R.id.selectedStation)
@@ -52,11 +61,14 @@ open class MainActivity : Activity() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CODE_SELECT_STATION) {
             if (resultCode == RESULT_OK) {
-                mSelectedStation!!.text = data
-                    .getStringExtra(ListViewActivity.EXTRA_SELECTED_STATION)
+                if (data != null) {
+                    mSelectedStation!!.text = data
+                        .getStringExtra(ListViewActivity.EXTRA_SELECTED_STATION)
+                }
             } else {
                 mSelectedStation!!.setText(
                     R.string.no_station_selected_msg
@@ -86,6 +98,21 @@ open class MainActivity : Activity() {
                 (batteryPct * 100).toInt()
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.item_clear -> /*mStorage.setStation(null)*/ true
+            /*R.id.item_exit  -> *//*finish()*//* true*/
+            else -> super.onOptionsItemSelected(item)
+        }
+
     }
 
     companion object {
