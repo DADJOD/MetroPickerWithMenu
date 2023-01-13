@@ -33,7 +33,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.metropickerwithmenu.Storage"
+        <activity
+            android:name="com.example.metropickerwithmenu.Storage"
             tools:ignore="Instantiatable" />
     </application>
 

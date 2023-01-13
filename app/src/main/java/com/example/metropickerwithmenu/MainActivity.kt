@@ -8,13 +8,13 @@ import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.metropickerwithmenu.databinding.ActivityMainBinding
 
+@Suppress("DEPRECATION")
 open class MainActivity : AppCompatActivity() {
 
     private var mSelectedStation: TextView? = null
@@ -61,6 +61,7 @@ open class MainActivity : AppCompatActivity() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CODE_SELECT_STATION) {
@@ -106,14 +107,32 @@ open class MainActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.item_clear -> /*mStorage.setStation(null)*/ true
-            /*R.id.item_exit  -> *//*finish()*//* true*/
-            else -> super.onOptionsItemSelected(item)
-        }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when (item.itemId) {
+//            true -> R.id.item_clear
+//            -> {
+//                mStorage.setStation(null)
+//                R.id.item_exit  -> true { finish() }
+//                else -> super.onOptionsItemSelected(item)
+//            }
+//
+//        }
+//    }
 
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            R.id.item_clear -> {
+//                mStorage.setStation(null)
+//                mSelectedStation!!.text = mStorage.getStation()
+//                return true
+//            }
+//            R.id.item_exit -> {
+//                finish()
+//                return true
+//            }
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
     companion object {
         const val CODE_SELECT_STATION = 1
