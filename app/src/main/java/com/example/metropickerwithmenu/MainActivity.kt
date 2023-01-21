@@ -30,9 +30,9 @@ open class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         Toast.makeText(this, ACTION_MAIN, Toast.LENGTH_SHORT).show()
 
+        // 3 dots for menu
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.toolbar)
 
         // station
@@ -111,8 +111,8 @@ open class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.item_clear -> {
-                mStorage.setStation(null)
-                mSelectedStation!!.text = mStorage.getStation()
+                mStorage.setStation(null)                        // clean selected item in storage
+                mSelectedStation!!.text = mStorage.getStation()  // set text
                 true
             }
             R.id.item_exit  -> {
